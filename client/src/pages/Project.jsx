@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Project() {
   return (
-    <div>
+    <h1>
       Project
-    </div>
+    </h1>
   )
 }
