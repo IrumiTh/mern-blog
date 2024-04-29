@@ -10,6 +10,8 @@ import Signin from './pages/SighIn'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Privateroute from './components/Privateroute'
+import OnlyAdminPrivateroute from './components/OnlyAdminPrivateroute'
+import CreatePost from './pages/CreatePost'
 
 
 
@@ -25,6 +27,9 @@ export default function App() {
         <Route path="/sign-up" element={<SingUp/>} />
         <Route element={<Privateroute />}>
           <Route path="/dashboard" element={<Dashboard/>} />
+        </Route>
+        <Route element={<OnlyAdminPrivateroute />}>
+          <Route path="/create-post" element={<CreatePost/>} />
         </Route>
         <Route path="/Project" element={<Project/>} />
       </Routes>
