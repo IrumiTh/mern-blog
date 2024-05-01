@@ -87,7 +87,7 @@ export default function CreatePost() {
             />
             <Select
               onChange={(e)=> 
-                setFormData({ ...formData, category: e.target.value})
+                setFormData({ ...formData, catergory: e.target.value})
               }
             >
                 <option value="uncategorized">Select a category</option>
