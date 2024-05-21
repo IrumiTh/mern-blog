@@ -16,6 +16,9 @@ import UpdatePost from './pages/Update'
 import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
 import Search from './pages/Search'
+import Add from './pages/CreateAdd'
+import CreateAdd from './pages/CreateAdd'
+import UpdateAdd from './pages/UpdateAdd'
 
 
 
@@ -37,6 +40,10 @@ export default function App() {
         <Route element={<OnlyAdminPrivateroute />}>
           <Route path="/create-post" element={<CreatePost/>} />
           <Route path="/update-post/:postId" element={<UpdatePost/>} />
+        </Route>
+        <Route element={<OnlyAdminPrivateroute />}>
+          <Route path="/create-add" element={<CreateAdd/>} />
+          <Route path="/update-add/:addId" element={<UpdateAdd/>} />
         </Route>
         <Route path="/project" element={<Project/>} />
         <Route path="/post/:postSlug" element={<PostPage/>} />

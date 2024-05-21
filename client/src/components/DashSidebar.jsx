@@ -6,6 +6,7 @@ import {
   HiChartPie,
   HiDocumentText,
   HiOutlineUserGroup,
+  HiSpeakerphone,
   HiUser,
 } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
@@ -79,6 +80,17 @@ export default function DashSidebar() {
                 Posts
               </Sidebar.Item>
             </Link>
+          )}
+          {currentUser.isAdmin && (
+            <Link to="/dashboard?tab=advertisement">
+              <Sidebar.Item
+                active={tab === "advertisement"}
+                icon={HiSpeakerphone}
+                as="div"
+              >
+                Advertisements
+            </Sidebar.Item>
+          </Link>
           )}
           {currentUser.isAdmin && (
             <>
