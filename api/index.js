@@ -8,8 +8,40 @@ import addRouter from './routes/add.route.js'
 import commentRoutes from './routes/comment.route.js'
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
 dotenv.config();
+
+// Swagger configuration
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'MERN Blog API',
+            version: '1.0.0',
+            description: 'API documentation for MERN Blog application',
+        },
+        servers: [
+            {
+                url: 'http://localhost:3000',
+                description: 'Development server',
+            },
+        ],
+        components: {
+            securitySchemes: {
+                cookieAuth: {
+                    type: 'apiKey',
+                    in: 'cookie',
+                    name: 'access_token',
+                },
+            },
+        },
+    },
+    apis: ['./api/routes/*.js'], // Path to route files for annotations
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 mongoose
     .connect(
@@ -32,6 +64,14 @@ app.use(express.json());
 
 app.use(cors());
 app.use(cookieParser())
+
+// Swagger UI route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', message: 'Server is running' });
+});
 
 app.listen(3000, () => {
     console.log('server is running on part 3000!!!');

@@ -19,6 +19,7 @@ import Search from './pages/Search'
 import Add from './pages/CreateAdd'
 import CreateAdd from './pages/CreateAdd'
 import UpdateAdd from './pages/UpdateAdd'
+import Exrapage from './pages/Exrapage'
 
 
 
@@ -30,6 +31,7 @@ export default function App() {
     <Header/>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/exrapage" element={<Exrapage/>} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<Signin/>} />
         <Route path="/sign-up" element={<SingUp/>} />

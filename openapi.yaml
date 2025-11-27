@@ -1,0 +1,147 @@
+openapi: "3.1.0"
+info:
+  title: MERN Blog API
+  version: 1.0.0
+  description: API documentation for MERN Blog application
+
+servers:
+  - url: /
+    description: Default server
+
+paths:
+  /api/auth/signup:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  example: testuser
+                email:
+                  type: string
+                  example: test@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+
+  /api/auth/signin:
+    post:
+      summary: Sign in a user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: test@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        '200':
+          description: User signed in successfully
+        '401':
+          description: Invalid credentials
+
+  /api/auth/google:
+    post:
+      summary: Google OAuth authentication
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Google authentication successful
+
+  /api/post/create:
+    post:
+      summary: Create a new post
+      tags:
+        - Posts
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                category:
+                  type: string
+      responses:
+        '201':
+          description: Post created successfully
+        '401':
+          description: Unauthorized
+
+  /api/post/getposts:
+    get:
+      summary: Get all posts
+      tags:
+        - Posts
+      responses:
+        '200':
+          description: List of posts
+
+  /api/user/test:
+    get:
+      summary: Test endpoint
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Test successful
+
+  /api/user/getusers:
+    get:
+      summary: Get all users
+      tags:
+        - Users
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: List of users
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: access_token
