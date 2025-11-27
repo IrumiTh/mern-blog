@@ -16,7 +16,7 @@ dotenv.config();
 // Swagger configuration
 const swaggerOptions = {
     definition: {
-        openapi: '3.0.0',
+        openapi: '3.1.0',
         info: {
             title: 'MERN Blog API',
             version: '1.0.0',
@@ -62,7 +62,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+// CORS configuration - update with your Choreo frontend URL
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser())
 
 // Swagger UI route
